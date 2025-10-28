@@ -1,6 +1,6 @@
 # 🧾 OCR Receipt Information Extractor
 
-This project uses **OCR (Optical Character Recognition)** to capture important information from receipts — such as barcodes, addresses, sender/receiver details, and item lists — and store them into a **PostgreSQL** database for structured storage and easy access.
+This project uses **DeepSeek-OCR (Optical Character Recognition)** to capture important information from receipts — such as barcodes, addresses, sender/receiver details, and item lists — and store them into a **PostgreSQL** database for structured storage and easy access.
 
 ---
 
