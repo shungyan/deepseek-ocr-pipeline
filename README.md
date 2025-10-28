@@ -33,8 +33,8 @@ Make sure you have the following installed:
 
 ```bash
 # Inside WSL
-git clone <your-repo-url>
-cd <repo-folder>/deepseek-ocr
+git clone https://github.com/shungyan/deepseek-ocr-pipeline
+cd deepseek-ocr-pipeline/deepseek-ocr
 
 # Create virtual environment
 uv venv
