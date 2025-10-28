@@ -44,6 +44,7 @@ uv pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url ht
 uv pip install -r requirements.txt
 uv pip install flash-attn==2.7.3 --no-build-isolation
 uv pip install accelerate>=0.26.0
+uv pip install fastapi uvicorn python-multipart
 
 # Run the OCR server
 uv run server.py
