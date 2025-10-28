@@ -55,7 +55,7 @@ uv run server.py
 ### 2. Setup PostgreSQL
 
 ```bash
-# Create a .env file in your project root
+# Create a .env file in app folder
 database=<your_database_name>
 user=<your_username>
 pasword=<your_password>
