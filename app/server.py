@@ -15,7 +15,6 @@ import os
 load_dotenv()
 
 # Access environment variables
-server = os.getenv("server")
 database = os.getenv("database")
 user = os.getenv("user")
 password = os.getenv("password")
@@ -23,41 +22,41 @@ password = os.getenv("password")
 app = FastAPI()
 
 
-# def OCR(image_bytes: bytes):
-#     try:
-#         encoded_image = base64.b64encode(image_bytes).decode("utf-8")
-#         # Prepare the JSON payload
-#         payload = {
-#             "model": "qwen2.5vl:7b",
-#             "messages": [
-#                 {
-#                     "role": "user",
-#                     "content": "show me all the text and number on the image",
-#                     "images": [encoded_image],  # base64-encoded image
-#                 }
-#             ],
-#             "stream": False,
-#         }
+def ollama_ocr(image_bytes: bytes):
+    try:
+        encoded_image = base64.b64encode(image_bytes).decode("utf-8")
+        # Prepare the JSON payload
+        payload = {
+            "model": "qwen2.5vl:7b",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "show me all the text and number on the image",
+                    "images": [encoded_image],  # base64-encoded image
+                }
+            ],
+            "stream": False,
+        }
 
-#         # Send POST request to Ollama HTTP API
-#         response = requests.post(
-#             "http://localhost:11434/api/chat", json=payload
-#         )
+        # Send POST request to Ollama HTTP API
+        response = requests.post(
+            "http://localhost:11434/api/chat", json=payload
+        )
 
-#         if response.status_code != 200:
-#             raise RuntimeError(f"API error: {response.text}")
+        if response.status_code != 200:
+            raise RuntimeError(f"API error: {response.text}")
 
-#         result = response.json()["message"]["content"]
+        result = response.json()["message"]["content"]
 
-#         with open(f"/app/server/text.txt", "w", encoding="utf-8") as f:
-#             f.write(result)
+        with open(f"server/text.txt", "w", encoding="utf-8") as f:
+            f.write(result)
 
-#         return result
+        return result
 
-#     except Exception as e:
-#         return f"An error occurred: {e}"
+    except Exception as e:
+        return f"An error occurred: {e}"
     
-def OCR(image_bytes: bytes):
+def deepseek_ocr(image_bytes: bytes):
     try:
         # Save the image bytes to a temporary file
         with tempfile.NamedTemporaryFile(suffix=".jpeg", delete=False) as tmp:
@@ -229,14 +228,14 @@ def store_data():
             conn.close()
 
 
-@app.post("/ocr")
-async def ocr_endpoint(
+@app.post("/deepseek-ocr")
+async def deepseek_ocr_endpoint(
     file: UploadFile = File(None),
 ):
     try:
         if file:
             image_bytes = await file.read()
-            content = OCR(image_bytes)
+            content = deepseek_ocr(image_bytes)
             print(content)
             summary = summarize(content)
             print(summary)
@@ -248,6 +247,27 @@ async def ocr_endpoint(
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/ollama-ocr")
+async def ollama_ocr_endpoint(
+    file: UploadFile = File(None),
+):
+    try:
+        if file:
+            image_bytes = await file.read()
+            content = ollama_ocr(image_bytes)
+            print(content)
+            summary = summarize(content)
+            print(summary)
+            result = store_data()
+            print(result)
+            return result
+        else:
+            raise HTTPException(status_code=400, detail="No image provided")
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 
 if __name__ == "__main__":

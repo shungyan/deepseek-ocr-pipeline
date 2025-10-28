@@ -15,7 +15,7 @@ ENV PATH="/root/.local/bin/:$PATH"
 WORKDIR /app
 
 # Copy server file
-COPY docker_server.py .
+COPY docker_server.py .env .
 
 RUN mkdir -p /app/server
 
