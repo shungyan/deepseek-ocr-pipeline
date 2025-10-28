@@ -100,6 +100,41 @@ curl -X POST http://localhost:1234/ollama-ocr \
 
 ---
 
+## Comparison between local OCR models
+
+| Receipt | Barcode | Sender | Receiver | Sender Address | Receiver Address |
+|---|---|---|---|---|---|
+| 1 | ❌ | ✔ | ✔ | ✔ | ✔ |
+| 2 | ✔ | ✔ | ✔ | ✔ | ✔ |
+| 3 | ✔ | ✔ | ✔ | ✔ | ✔ |
+| 4 | ✔ | ❌ | ✔ | ❌ | ❌ |
+
+**Weakness:**
+1. Unable to detect barcode number if without order no. and ship no.  
+2. Unable to detect wordings that are too small  
+
+**OCR Model:** `gemma3:latest`
+
+| Receipt | Barcode | Sender | Receiver | Sender Address | Receiver Address |
+|---|---|---|---|---|---|
+| 1 | ❌ | ✔ | ✔ | ✔ | ❌ |
+| 2 | ✔ | ✔ | ❌ | ✔ | ✔ |
+| 3 | ❌ | ✔ | ✔ | ❌ | ✔ |
+| 4 | ❌ | ✔ | ❌ | ❌ | ❌ |
+
+**OCR Model:** `deepseek-OCR`
+
+| Receipt | Barcode | Sender | Receiver | Sender Address | Receiver Address |
+|---|---|---|---|---|---|
+| 1 | ✔ | ✔ | ✔ | ✔ | ✔ |
+| 2 | ✔ | ✔ | ✔ | ✔ | ❌ |
+| 3 | ❌ | ✔ | ✔ | ✔ | ✔ |
+| 4 | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+*Note:* `deepseek` hallucinate during receipt 4
+
+---
+
 ## 📜 License
 This project is licensed under the **MIT License**.  
 Feel free to use and modify it for your own applications.
