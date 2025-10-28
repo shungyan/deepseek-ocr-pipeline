@@ -32,7 +32,7 @@ Make sure you have the following installed:
 ### 1. Setup DeepSeek OCR
 
 ```bash
-# Inside WSL
+# Inside WSL/Ubuntu
 git clone https://github.com/shungyan/deepseek-ocr-pipeline
 cd deepseek-ocr-pipeline/deepseek-ocr
 
