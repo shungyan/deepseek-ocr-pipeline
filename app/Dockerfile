@@ -24,9 +24,10 @@ RUN uv venv
 RUN uv pip install fastapi \
     uvicorn \
     ollama \
-    psycopg2-binary\
+    psycopg2-binary \
     python-multipart \
-    requests
+    requests \
+    python-dotenv
 
 # Expose default FastAPI port
 EXPOSE 1234
