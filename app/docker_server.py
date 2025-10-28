@@ -19,7 +19,6 @@ server = os.getenv("server")
 database = os.getenv("database")
 user = os.getenv("user")
 password = os.getenv("password")
-real_email = os.getenv("email")
 
 
 app = FastAPI()
