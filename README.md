@@ -102,6 +102,7 @@ curl -X POST http://localhost:1234/ollama-ocr \
 
 ## Comparison between local OCR models
 
+**OCR Model:** `qwen2.5vl:7b`
 | Receipt | Barcode | Sender | Receiver | Sender Address | Receiver Address |
 |---|---|---|---|---|---|
 | 1 | ❌ | ✔ | ✔ | ✔ | ✔ |
