@@ -40,7 +40,10 @@ cd deepseek-ocr-pipeline/deepseek-ocr
 uv venv
 
 # Install dependencies
-pip install -r requirements.txt
+uv pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118
+uv pip install -r requirements.txt
+uv pip install flash-attn==2.7.3 --no-build-isolation
+uv pip install accelerate>=0.26.0
 
 # Run the OCR server
 uv run server.py
