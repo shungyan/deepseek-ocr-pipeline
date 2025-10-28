@@ -83,7 +83,12 @@ docker run -p 1234:1234 --name ocr -d --restart always ocr
 You can test the endpoint using `curl`:
 
 ```bash
-curl -X POST http://localhost:1234/ocr \
+#deepseek-ocr
+curl -X POST http://localhost:1234/deepseek-ocr \
+  -F "file=@~/Desktop/ocr/images/<receiptname>.jpeg"
+
+#ollama qwen2.5vl:7b
+curl -X POST http://localhost:1234/ollama-ocr \
   -F "file=@~/Desktop/ocr/images/<receiptname>.jpeg"
 ```
 
