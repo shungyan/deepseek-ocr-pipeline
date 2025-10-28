@@ -77,7 +77,7 @@ def OCR(image_bytes: bytes):
         result = response.json().get("result", "")
 
         # Optionally save output to file
-        with open("server/text.txt", "w", encoding="utf-8") as f:
+        with open("/app/server/text.txt", "w", encoding="utf-8") as f:
             f.write(result)
 
         return result
