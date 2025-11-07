@@ -453,7 +453,7 @@ async def deepseek_ocr_endpoint(
     try:
         if file:
             image_bytes = await file.read()
-            content = ollama_ocr(image_bytes)
+            content = deepseek_ocr(image_bytes)
             print(content)
             category=categorize(content)
             print(category)
